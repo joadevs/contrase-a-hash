@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHA-256 Hash Calculator</title>
+  <style>
+ body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-section,
+.output-section {
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: calc(100% - 10px);
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.output-section button {
+  margin-left: 10px;
+}
+
+@media (max-width: 600px) {
+    * {
+  margin: 0;
+  padding: 0;
+}
+
+  .container {
+    padding: 20px;
+  }
+
+  textarea {
+    height: 100px;
+  }
+}
+
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+</head>
+<body> 
+    <center>
+        <div class="container">
+          <h1>SHA-256 Hash Calculator</h1>
+          <div class="input-section">
+            <textarea id="inputText" placeholder="Enter text to hash" onkeydown="checkEnter(event)"></textarea>
+            <button onclick="calculateHash()">Calculate Hash</button>
+          </div>
+          <div class="output-section">
+            <h2>Hash Result:</h2>
+            <textarea id="outputHash" placeholder="Hashed Text" readonly></textarea>
+          </div>
+        </div>
+      </center>
+    
+      <script>
+        function calculateHash() {
+          var inputText = document.getElementById('inputText').value;
+          var hash = sha256(inputText);
+          document.getElementById('outputHash').value = hash;
+        }
+    
+        function checkEnter(event) {
+          if (event.key === "Enter") {
+            calculateHash();
+          }
+        }
+      </script>
+    </body>
+    </html>
